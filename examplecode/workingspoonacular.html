@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script>
+    //source url that would have come from food2fork api
+    var sourceURL = "http://www.closetcooking.com/2011/08/buffalo-chicken-grilled-cheese-sandwich.html";
+    //url for ajax call to getting ingredients from sourceurl
+    var callURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/extract?forceExtraction=false&url=" + sourceURL;
+    //variable for url for second ajax call
+    var callURL2;
+    //dummy variables for total recipe values
+    var calories=0;
+    var protein=0;
+    //this ajax call gets the ingredients from the website recipe
+    $.ajax({
+        url: callURL,
+        method: "GET",
+        dataType: 'json',
+        success: function(data) { console.dir((data.source)); },
+        error: function(err) { alert(err); },
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("X-Mashape-Authorization", "qOedqxei0amshubmBCH4ilm2lfLnp1KpP0Djsnt8Nw2LEkkbxX");
+        }
+    }).done(function(response) {
+        console.log(response);
+        //On response, this for loop should go throught the ingredients and return the information about them and plug the information into the next ajax call url
+        for (i = 0; i < response.extendedIngredients.length; i++) {
+            var id = response.extendedIngredients[i].id;
+            var amount = response.extendedIngredients[i].amount;
+            var unit = response.extendedIngredients[i].unit;
+            callURL2 = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/"+id+"/information?amount="+amount+"&unit="+unit;
+            //this ajax call gets the nutrition information about each ingredient based on id, amount, and unit
+            $.ajax({
+                url: callURL2,
+                method: "GET",
+                dataType: 'json',
+                success: function(data) { console.dir((data.source)); },
+                error: function(err) { alert(err); },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("X-Mashape-Authorization", "qOedqxei0amshubmBCH4ilm2lfLnp1KpP0Djsnt8Nw2LEkkbxX");
+                    
+                }
+            }).done(function(response){
+            	console.log(response);
+            	console.log(response.nutrition.nutrients[0].amount);
+            	//sum up calories from all ingredients into total calorie count
+            	calories = calories+parseInt(response.nutrition.nutrients[0].amount);
+            	console.log("total calories: "+calories);
+            })
+        };
+
+
+    });
+    </script>
+</body>
+
+</html>
