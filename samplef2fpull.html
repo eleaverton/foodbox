@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script>
+    var recipeId;
+    var callURL1 = "https://community-food2fork.p.mashape.com/search?key=ed45a57912d5188b7b4b7280c78848ea&q=shredded+chicken";
+    var callURL2;
+
+    $.ajax({
+        url: callURL1,
+        method: "GET",
+        dataType: 'json',
+        success: function(data) { console.dir((data.source)); },
+        error: function(err) { alert(err); },
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("X-Mashape-Authorization", "qOedqxei0amshubmBCH4ilm2lfLnp1KpP0Djsnt8Nw2LEkkbxX");
+            // Enter here your Mashape key
+        }
+    }).done(function(response) {
+        console.log(response);
+        sourceurl = response.recipes[0].source_url;
+        console.log(sourceurl);
+       
+    });
+    </script>
+</body>
+
+</html>
