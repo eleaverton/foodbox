@@ -6,7 +6,7 @@ var foodImg;
 var foodDetails;
 var searchTerm;
 var calories = 0;
-var protein =0;
+var protein = 0;
 
 var config = {
     apiKey: "AIzaSyBHqANba4Adm1lWbJn3H9UGNVBZ4ZvIf00",
@@ -43,11 +43,6 @@ $(document).ready(function() {
         		imgURL = response.recipes[i].image_url;
         		title = response.recipes[i].title;   
         		rating = response.recipes[i].social_rank;
-        		foodImg = $("<img height='200px' width='200px'>");
-        		foodImg.attr("src", imgURL);
-        		$("#foodImgDiv").append(foodImg);
-        		foodDetails = $("<p>" + title + "</p>" + "<p>Rating: " + rating + "</p>");
-        		$("#foodDetailsDiv").append(foodDetails);
         		 //url for ajax call to getting ingredients from sourceurl
     			var callURL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/extract?forceExtraction=false&url=" + sourceURL;
     			//variable for url for second ajax call
@@ -57,36 +52,48 @@ $(document).ready(function() {
         			url: callURL,
         			method: "GET",
         			dataType: 'json',
-        			error: function(err) { alert(err); },
         			beforeSend: function(xhr) {
             		xhr.setRequestHeader("X-Mashape-Authorization", "qOedqxei0amshubmBCH4ilm2lfLnp1KpP0Djsnt8Nw2LEkkbxX");
         		}
     			}).done(function(response) {
-        			//On response, this for loop should go throught the ingredients and return the information about them and plug the information into the next ajax call url
+        			//On response, this for loop should go throught the ingredients and return the information about them and plug the information into the next ajax call url    
+        			console.log(i + " before loop");			
         			for (i = 0; i < response.extendedIngredients.length; i++) {
+        				console.log(i + " right after loop");
+        				console.log(response);
+        				console.log(response.extendedIngredients.length - 1);
+        				console.log(i);
             			var id = response.extendedIngredients[i].id;
             			var amount = response.extendedIngredients[i].amount;
             			var unit = response.extendedIngredients[i].unit;
-            			callURL2 = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/"+id+"/information?amount="+amount+"&unit="+unit;
-            			//this ajax call gets the nutrition information about each ingredient based on id, amount, and unit
+            			callURL2 = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/"+id+"/information?amount="+amount+"&unit="+unit; //this ajax call gets the nutrition information about each ingredient based on id, amount, and unit
             			$.ajax({
                 		url: callURL2,
                 		method: "GET",
 		                dataType: 'json',
-		                error: function(err) { alert(err); },
 		                beforeSend: function(xhr) {
 		                    xhr.setRequestHeader("X-Mashape-Authorization", "qOedqxei0amshubmBCH4ilm2lfLnp1KpP0Djsnt8Nw2LEkkbxX");
 		                    
 		                }
-			            }).done(function(response){
-			            	console.log(response);
-			            	console.log(response.nutrition.nutrients[i].amount);
+			            }).done(function(response2) {
 			            	//sum up calories from all ingredients into total calorie count
-			            	calories += parseInt(response.nutrition.nutrients[i].amount);
-			            	console.log("total calories: "+calories);
+			            	console.log(response2);
+			            	calories = calories + parseInt(response2.nutrition.nutrients[0].amount);
+			            	console.log("Total Calories: "+ calories);
+       	            		if (i = (response.extendedIngredients.length - 1)) {
+       	            			console.log(i + " in If statement")
+       	            			calories = 0;
+			            		console.log("worked");
+			            		console.log(calories);
+			            	}			        			            			     
 			            })
-        			};
+        			}
     			});
+    			foodImg = $("<img height='200px' width='200px'>");
+        		foodImg.attr("src", imgURL);
+        		$("#foodImgDiv").append(foodImg);
+        		foodDetails = $("<p>" + title + "</p>" + "<p>Rating: " + rating + "</p>" + "<p>Total Calories "+ calories + "</p>");
+        		$("#foodDetailsDiv").append(foodDetails);
         	}
     	});
     });
