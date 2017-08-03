@@ -16,6 +16,20 @@
 	padding-left: 0px;
 }
 
+.banner1 {
+	background-color: #FFFFFF;
+	color: #D33E43;	
+	padding-left: 15px;
+}
+
+.banner2 {
+	background-color: #FFFFFF;
+	color: #D33E43;	
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top:30px;
+}
+
 #foodbox{
 	font-family: 'Montserrat Alternates', sans-serif;
 	color: #D33E43;
@@ -39,4 +53,17 @@
 
 .is-8 {
 	margin-top: 12px;
+}
+
+#box{
+	margin-top:10px;
+	margin-right:15px;
+	height:100px;
+
+}
+
+#signin, #signup{
+	background-color: #D33E43;
+	color:#ffffff;
+
 }

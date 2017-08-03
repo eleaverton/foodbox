@@ -7,30 +7,38 @@
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar ">
-            <div class="navbar-brand"></div>
-            <div class="navbar-start">Enter an ingredient
-                <input class="input" type="text" placeholder="e.g. chocolate">
-                <button class="button is-primary" id="search">Search</button>
+            <div class="navbar-brand">FB</div>
+            <div class="navbar-start">
+                <input class="input" type="text" placeholder="Enter an ingredient">
+                <button class="button" id="search">Search</button>
             </div>
             <div class="navbar-end">
-                <a class="navbar-item" href="#">Sign in/up</a>
+                <a class="navbar-item" href="signinup.html">Sign in/up</a>
             </div>
         </nav>
-        <div class="tile is-parent">
-            <article class="tile is-child notification is-primary">
-                <p class="title">FoodBox</p>
+
+        <div class="tile">
+            <article class="tile is-child is-1">
+            <figure class="image">
+                    <img src="assets/images/box.png" id="box">
+                </figure>
+                </article>
+            <article class="tile is-child notification banner1">
+                <p class="title" id="foodbox">FoodBox</p>
                 <p class="subtitle">Nutrition for the web's best recipes</p>
             </article>
         </div>
         <div class="tile is-ancestor">
         <div class="tile is-vertical is-6">
         <div class="tile is-parent">
-            <article class="tile is-child notification is-primary">
+            <article class="tile is-child banner2">
                 <p class="title">Welcome to Foodbox!</p>
                 <p class="subtitle">Please sign up to save recipes to your FoodBox.</p>
                 <div class="field">
@@ -60,9 +68,9 @@
 
         </div><!--closes is 6 div -->
         <div class="tile is-parent">
-            <article class="tile is-child notification is-primary">
+            <article class="tile is-child banner2">
                 <p class="title">Already a member?</p>
-                <p class="subtitle">Welcome back! Sign in to access your FoodBox</p>
+                <p class="subtitle">Welcome back! Sign in to access your FoodBox.</p>
                 <div class="field">
                     <label class="label">Email</label>
                     <div class="control has-icons-left">
