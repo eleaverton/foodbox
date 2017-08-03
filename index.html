@@ -7,23 +7,25 @@
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar ">
-            <div class="navbar-brand"></div>
-            <div class="navbar-start">Enter an ingrediant
-                <input class="input" type="text" placeholder="e.g. chocolate">
-                <button class="button is-primary" id="search">Search</button>
+            <div class="navbar-brand">FB</div>
+            <div class="navbar-start">
+                <input class="input" type="text" placeholder="Enter an ingrediant">
+                <button class="button" id="search">Search</button>
             </div>
             <div class="navbar-end">
                 <a class="navbar-item" href="signinup.html">Sign in/up</a>
             </div>
         </nav>
-        <div class="tile is-parent">
-            <article class="tile is-child notification is-primary">
-                <p class="title">FoodBox</p>
+        <div>
+            <article class="tile is-child notification banner">
+                <p class="title" id="foodbox">FoodBox</p>
                 <p class="subtitle">Nutrition for the web's best recipes</p>
             </article>
         </div>
@@ -35,7 +37,7 @@
                             <figure class="image is-4by3">
                                 <img src="https://i1.wp.com/www.thesassycook.com/wp-content/uploads/2015/03/best-brownies-recipe-ever.jpg?w=1200">
                             </figure>
-                            <p class="title">Brownies</p>
+                            <p class="title food-title">Brownies</p>
                             <div class="content">
                                 Calories: a billion Fat: a lot Sugar: tons Protein: look elsewhere
                             </div>
@@ -46,7 +48,7 @@
                             <figure class="image is-4by3">
                                 <img src="https://i1.wp.com/www.thesassycook.com/wp-content/uploads/2015/03/best-brownies-recipe-ever.jpg?w=1200">
                             </figure>
-                            <p class="title">Brownies</p>
+                            <p class="title food-title">Brownies</p>
                             <div class="content">
                                 Calories: a billion Fat: a lot Sugar: tons Protein: look elsewhere
                             </div>
@@ -57,20 +59,21 @@
                             <figure class="image is-4by3">
                                 <img src="https://i1.wp.com/www.thesassycook.com/wp-content/uploads/2015/03/best-brownies-recipe-ever.jpg?w=1200">
                             </figure>
-                            <p class="title">Brownies</p>
+                            <p class="title food-title">Brownies</p>
                             <div class="content">
                                 Calories: a billion Fat: a lot Sugar: tons Protein: look elsewhere
                             </div>
                         </article>
                     </div>
-                </div><!--closes tile div -->
+                </div>
+                <!--closes tile div -->
                 <div class="tile">
                     <div class="tile is-parent">
                         <article class="tile is-child">
                             <figure class="image is-4by3">
                                 <img src="https://i1.wp.com/www.thesassycook.com/wp-content/uploads/2015/03/best-brownies-recipe-ever.jpg?w=1200">
                             </figure>
-                            <p class="title">Brownies</p>
+                            <p class="title food-title">Brownies</p>
                             <div class="content">
                                 Calories: a billion Fat: a lot Sugar: tons Protein: look elsewhere
                             </div>
@@ -81,7 +84,7 @@
                             <figure class="image is-4by3">
                                 <img src="https://i1.wp.com/www.thesassycook.com/wp-content/uploads/2015/03/best-brownies-recipe-ever.jpg?w=1200">
                             </figure>
-                            <p class="title">Brownies</p>
+                            <p class="title food-title">Brownies</p>
                             <div class="content">
                                 Calories: a billion Fat: a lot Sugar: tons Protein: look elsewhere
                             </div>
@@ -92,17 +95,50 @@
                             <figure class="image is-4by3">
                                 <img src="https://i1.wp.com/www.thesassycook.com/wp-content/uploads/2015/03/best-brownies-recipe-ever.jpg?w=1200">
                             </figure>
-                            <p class="title">Brownies</p>
+                            <p class="title food-title">Brownies</p>
                             <div class="content">
                                 Calories: a billion Fat: a lot Sugar: tons Protein: look elsewhere
                             </div>
                         </article>
                     </div>
-                </div><!--closes tile div -->
-            </div><!--closes tile is-vertical is-8 div -->
-        </div><!--closes tile is-ancestor div -->
-    </div><!--closes columns div -->
-    </div><!--closes container div -->
+                </div>
+                <!--closes tile div -->
+            </div>
+            <!--closes tile is-vertical is-8 div -->
+            <div class="tile is-vertical is-4">
+                <nav class="panel">
+                    <p class="panel-heading">
+                        My FoodBox
+                    </p>
+                    <div class="panel-block">
+                        <div class="tile is-parent">
+                            <article class="tile is-child">
+                                <figure class="image is-4by3">
+                                    <img src="https://i1.wp.com/www.thesassycook.com/wp-content/uploads/2015/03/best-brownies-recipe-ever.jpg?w=1200">
+                                </figure>
+                                <p class="title food-title">Brownies</p>
+                            </article>
+                        </div>
 
+						  <div class="tile is-parent">
+                            <article class="tile is-child">
+                                <figure class="image is-4by3">
+                                    <img src="https://i1.wp.com/www.thesassycook.com/wp-content/uploads/2015/03/best-brownies-recipe-ever.jpg?w=1200">
+                                </figure>
+                                <p class="title food-title">Brownies</p>
+                            </article>
+                        </div>
+
+
+                    </div> <!--closes panel block div -->
+                </nav>
+            </div> <!--closes tile is-vertical is-4 div -->
+        </div>
+        <!--closes tile is-ancestor div -->
+    </div>
+    <!--closes columns div -->
+    </div>
+    <!--closes container div -->
 </body>
+
 </html>

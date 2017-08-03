@@ -1,0 +1,42 @@
+.navbar-brand {
+	font-family: 'Montserrat Alternates', sans-serif;
+	color: #D33E43;
+	font-weight: bold;
+	font-size: 30px;
+	padding-right: 15px;
+}
+
+.navbar-start {
+	margin-top: 8px;
+}
+
+.banner {
+	background-color: #FFF;
+	color: #D33E43;	
+	padding-left: 0px;
+}
+
+#foodbox{
+	font-family: 'Montserrat Alternates', sans-serif;
+	color: #D33E43;
+	font-size: 3em;
+}
+
+.panel-heading{
+	font-family: 'Montserrat Alternates', sans-serif;
+	color: #D33E43;
+	font-weight: bold;
+
+}
+
+.food-title {
+	margin-bottom: 4px;
+}
+
+.is-4 {
+	margin-top: 12px;
+}
+
+.is-8 {
+	margin-top: 12px;
+}
