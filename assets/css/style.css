@@ -40,12 +40,28 @@
 	font-family: 'Montserrat Alternates', sans-serif;
 	color: #D33E43;
 	font-weight: bold;
+	margin-top: 10px;  /*to make same height as content to left*/
 
+}
+
+.subtitle {
+	font-family: 'Arimo', sans-serif;
 }
 
 .food-title {
 	margin-bottom: 4px;
+	font-family: 'Arimo', sans-serif;
 }
+
+.fa-star-o {
+	position: relative;
+	top: 7px;
+}
+
+.content {
+	font-family: 'Arimo', sans-serif;
+}
+
 
 .is-4 {
 	margin-top: 12px;
@@ -65,5 +81,6 @@
 #signin, #signup{
 	background-color: #D33E43;
 	color:#ffffff;
+	font-family: 'Arimo', sans-serif;
 
 }
