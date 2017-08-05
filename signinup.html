@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 </head>
 
 <body>
@@ -45,7 +47,7 @@
                 <div class="field">
                     <label class="label">Username</label>
                     <div class="control has-icons-left">
-                        <input class="input" type="text" placeholder="Username input" value="janedoe">
+                        <input class="input" type="text" placeholder="Username input" value="janedoe" id="signUpUser">
                         <span class="icon is-small is-left">
                             <i class="fa fa-user"></i>
                         </span>
@@ -67,7 +69,7 @@
                 <div class="field">
                     <label class="label">Username</label>
                     <div class="control has-icons-left">
-                        <input class="input" type="text" placeholder="Username input" value="janedoe">
+                        <input class="input" type="text" id="signInUser" placeholder="Username input" value="janedoe">
                         <span class="icon is-small is-left">
                             <i class="fa fa-user"></i>
                         </span>
@@ -83,6 +85,7 @@
         </div><!--closes ancestor div -->
     </div>
     <!--closes container div -->
+    <script src="assets/javascript/app.js"></script>
 </body>
 
 </html>
