@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 </head>
 
 <body>
@@ -18,8 +20,8 @@
         <!--changing logo to link to homepage-->
             <a class="navbar-brand" href="index.html">FB</a>
             <div class="navbar-start">
-                <input class="input" type="text" placeholder="Enter an ingredient">
-                <button class="button" id="search">Search</button>
+                <input class="searchInput" type="text" placeholder="Enter an ingredient">
+                <button class="button" id="btnSearch">Search</button>
             </div>
             <div class="navbar-end">
                 <a class="navbar-item" href="signinup.html">Sign in/up</a>
@@ -38,7 +40,7 @@
             </article> -->
         </div>
         <div class="tile is-ancestor">
-            <div class="tile is-vertical is-8">
+            <div class="tile is-vertical is-8" id="foodImgDiv">
                 <div class="tile">
                     <div class="tile is-parent">
                         <article class="tile is-child">
@@ -190,6 +192,7 @@
     <!--closes columns div -->
     </div>
     <!--closes container div -->
+    <script src="assets/javascript/app.js"></script>
 </body>
 
 </html>
