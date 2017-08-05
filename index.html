@@ -15,7 +15,8 @@
 <body>
     <div class="container">
         <nav class="navbar ">
-            <div class="navbar-brand">FB</div>
+        <!--changing logo to link to homepage-->
+            <a class="navbar-brand" href="index.html">FB</a>
             <div class="navbar-start">
                 <input class="input" type="text" placeholder="Enter an ingredient">
                 <button class="button" id="search">Search</button>
@@ -24,14 +25,17 @@
                 <a class="navbar-item" href="signinup.html">Sign in/up</a>
             </div>
         </nav>
-        <div class="tile">
-            <figure class="image is-96x96">
-                <img src="assets/images/box.png" id="box">
+        <div class="tile is-parent is-6">
+            <article class="tile is-child">
+            <figure class="image is-">
+                <img src="assets/images/foodboxlogo.png" id="box">
             </figure>
-            <article class="tile is-child notification banner1">
+            </article>
+           <!--  added full foodbox logo instead of separate box and text
+           <article class="tile is-child notification banner1">
                 <p class="title" id="foodbox">FoodBox</p>
                 <p class="subtitle">Nutrition for the web's best recipes</p>
-            </article>
+            </article> -->
         </div>
         <div class="tile is-ancestor">
             <div class="tile is-vertical is-8">
