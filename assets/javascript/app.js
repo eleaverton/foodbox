@@ -31,6 +31,8 @@ var provider = new firebase.auth.GoogleAuthProvider();
 // create instance of firebase database
 var usersRef = database.ref("/users");
 var recipeRef;
+var savedRecipeInfo=[];
+var myfoodbox=[];
 var newUser = {};
 
 $(document).ready(function() {
@@ -106,6 +108,7 @@ $(document).ready(function() {
 
                 function display() {
                     for (i = 0; i < 4; i++) {
+                        //**these variable names need to be replaced with variables that match korwynns page
                         var recipeDiv = $("<div class='tile-is-parent recipeDiv' id=" + foodItemsiId[i] + "></div>");
                         var recipeArticle = $("<article class='tile is-child'></article>");
                         var recipeFigure = $("<figure class='image is-4by3'></figure>");
@@ -126,7 +129,7 @@ $(document).ready(function() {
                         foodImg.attr("src", imgURL[i]);
                         //console.log (foodImg);
                         $(recipeFigure).append(foodImg);
-                        //need to make image link to sourceURL
+                        //**need to make image link to sourceURL
 
 
                         $(recipeArticle).append(recipeFigure, recipeTitle, recipeInfo);
@@ -159,16 +162,35 @@ $(document).ready(function() {
                 recipeRef.on("child_added",function(snapshot){
                     snapshot.forEach(function(childSnapshot){
                         var childData=childSnapshot.val();
-                        console.log(childData);
-                        //**need to group these into an object or give them variable names so we can access them and put them in myfoodbox
+                        if(savedRecipeInfo.includes(childData)===false){
+                            savedRecipeInfo.push(childData);
+                        }
                     });
-                    // console.log(snapshot.val());
-                    // var boxRecipeInfo = snapshot.val();
-
-
-                    
                 })
-
+                console.log(savedRecipeInfo);
+                //this for loop goes through saved recipe info and creates objects for each recipe
+                //it has to start in savedRecipeInfo at the point where it can skip
+                //the info that has already been added as an object (hence the i=foodboxItems*4)
+                var foodboxItems = myfoodbox.length;
+                for (i=foodboxItems*4;i<savedRecipeInfo.length;i++){
+                    if (i%4===0){
+                        var foodboxrecipe={};
+                        foodboxrecipe.Id= savedRecipeInfo[i];   
+                    }
+                    if (i%4===1){
+                        foodboxrecipe.Title = savedRecipeInfo[i];
+                    }
+                    if (i%4===2){
+                        foodboxrecipe.imgURL = savedRecipeInfo[i];
+                    }
+                    if (i%4===3){
+                        foodboxrecipe.sourceURL = savedRecipeInfo[i];
+                        myfoodbox.push(foodboxrecipe);
+                        console.log(foodboxrecipe)
+                    }
+                };
+                console.log(myfoodbox);
+                //**need to create a loop that pushes myfoodbox objects to html
 
                 });
 
