@@ -58,6 +58,11 @@
 	top: 7px;
 }
 
+.fa-star {
+	position: relative;
+	top: 7px;
+}
+
 .content {
 	font-family: 'Arimo', sans-serif;
 }

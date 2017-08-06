@@ -12,6 +12,7 @@ var foodItemsiProtein = ["8", "4", "6", "7"];
 var foodItems = [];
 var newFoodItem = {};
 var counter = 0;
+var key;
 var username;
 
 var config = {
@@ -39,9 +40,23 @@ $(document).ready(function() {
                 newUser.userName = $("#signUpUser").val().trim();
                 newUser.recipes = 0;
                 console.log(newUser.name);
-                //newUser.recipes = ;
-                usersRef.push(newUser);
+                //push the newuser and get the key assciated with the data push
+                pushedUserRef = usersRef.push(newUser);
+                key=pushedUserRef.getKey();
+                console.log(key);
+                (function(global){
+                    global.localStorage.setItem('keyvalue',key);
+                }(window));
+                
+                
                 username = newUser.userName;
+                console.log(username);
+                (function(global){
+                    global.localStorage.setItem('username',username);
+                }(window));
+
+                window.open("index.html","_self")
+
             });
 
             // button to sign into foodbox app
@@ -52,21 +67,33 @@ $(document).ready(function() {
                 usersRef.once("value", function(snap) {
                     snap.forEach(function(child) {
                         if (child.val().userName === name) {
-                            window.open("index.html");
+                            window.open("index.html","_self");
                             //**open in same tab
                             // cancel enumeration
                             userInDatabase = true;
                             return true;
+                            username=name;
+                            console.log(username);
+                            //need to be able to pull key
                         }
                     }); // end of snap eventlistener
                     // if user was not found
                     if (!userInDatabase) {
-                        alert("You are not recognized");
+                        // alert("You are not recognized");
+                        $("#signinDiv").append("Username not in database.");
                     }
                 }); // end of usersRef eventlistener
             });
 
             $("#btnSearch").on("click", function(event) {
+                (function(global){
+                    key=global.localStorage.getItem("keyvalue");
+                }(window));
+                (function(global){
+                    username=global.localStorage.getItem("username");
+                }(window));
+                console.log(key);
+                console.log(username);
                 $(".rowTile").empty();
                 event.preventDefault();
                 searchTerm = $("#searchInput").val();
@@ -108,6 +135,9 @@ $(document).ready(function() {
                 console.log($(this).parents()[2].id);
                 var selectedRecipeId = $(this).parents()[2].id;
                 console.log(selectedRecipeId);
+                var starId = "#star"+selectedRecipeId;
+                console.log(starId);
+                 $(starId).removeClass('fa-star-o').addClass('fa-star');
                 //find recipeid in array of info from ajax calls
                 var position = foodItemsiId.indexOf(selectedRecipeId);
                 console.log(position);
@@ -118,9 +148,11 @@ $(document).ready(function() {
                 selectedRecipe.sourceURL = sourceURL[position];
 
                 console.log(selectedRecipe);
+                console.log(key);
+                recipeRef = database.ref("/users/"+key+"/recipes")
+                recipeRef.push(selectedRecipe);
 
-
-
+//https://console.firebase.google.com/project/foodbox-aac5f/database/data/users/-KqoinL1Idirj6XD8coX/recipes
                 // usersRef.on("value", function(snap) {
                 //     snap.forEach(function(child) {
                 //         if (child.val().userName === username) {

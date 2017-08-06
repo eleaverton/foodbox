@@ -26,63 +26,65 @@
                 <a class="navbar-item" href="signinup.html">Sign in/up</a>
             </div>
         </nav>
-
         <div class="tile">
-            <article class="tile is-child is-1">
-            <figure class="image">
-                    <img src="assets/images/box.png" id="box">
-                </figure>
+            <div class="tile is-parent is-6">
+                <article class="tile is-child">
+                    <figure class="image is-">
+                        <img src="assets/images/foodboxlogo.png" id="box">
+                    </figure>
                 </article>
-            <article class="tile is-child notification banner1">
-                <p class="title" id="foodbox">FoodBox</p>
-                <p class="subtitle">Nutrition for the web's best recipes</p>
-            </article>
+            </div>
+            <!-- <article class="tile is-child notification banner1">
+    <p class="title" id="foodbox">FoodBox</p>
+    <p class="subtitle">Nutrition for the web's best recipes</p>
+</article> -->
         </div>
         <div class="tile is-ancestor">
-        <div class="tile is-vertical is-6">
-        <div class="tile is-parent">
-            <article class="tile is-child banner2">
-                <p class="title">Welcome to Foodbox!</p>
-                <p class="subtitle">Please sign up to save recipes to your FoodBox.</p>
-                <div class="field">
-                    <label class="label">Username</label>
-                    <div class="control has-icons-left">
-                        <input class="input" type="text" placeholder="Username input" value="janedoe" id="signUpUser">
-                        <span class="icon is-small is-left">
+            <div class="tile is-vertical is-6">
+                <div class="tile is-parent">
+                    <article class="tile is-child banner2">
+                        <p class="title">Welcome to Foodbox!</p>
+                        <p class="subtitle">Please sign up to save recipes to your FoodBox.</p>
+                        <div class="field">
+                            <label class="label">Username</label>
+                            <div class="control has-icons-left" id="signupDiv">
+                                <input class="input" type="text" placeholder="Username input" value="janedoe" id="signUpUser">
+                                <span class="icon is-small is-left">
+                                <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="control">
+                            <button class="button is-warning" id="signup">
+                                Sign Up
+                            </button>
+                        </p>
+                    </article>
+                </div>
+            </div>
+            <!--closes is 6 div -->
+            <div class="tile is-parent">
+                <article class="tile is-child banner2">
+                    <p class="title">Already a member?</p>
+                    <p class="subtitle">Welcome back! Sign in to access your FoodBox.</p>
+                    <div class="field">
+                        <label class="label">Username</label>
+                        <div class="control has-icons-left" id="signinDiv">
+                            <input class="input" type="text" id="signInUser" placeholder="Username input" value="janedoe">
+                            <span class="icon is-small is-left">
                             <i class="fa fa-user"></i>
                         </span>
+                        </div>
                     </div>
-                </div>
-                <p class="control">
-                    <button class="button is-warning" id="signup">
-                        Sign Up
-                    </button>
-                </p>
-        </article>
+                    <p class="control">
+                        <button class="button is-warning" id="signin">
+                            Sign in
+                        </button>
+                    </p>
+                </article>
+            </div>
         </div>
-
-        </div><!--closes is 6 div -->
-        <div class="tile is-parent">
-            <article class="tile is-child banner2">
-                <p class="title">Already a member?</p>
-                <p class="subtitle">Welcome back! Sign in to access your FoodBox.</p>
-                <div class="field">
-                    <label class="label">Username</label>
-                    <div class="control has-icons-left">
-                        <input class="input" type="text" id="signInUser" placeholder="Username input" value="janedoe">
-                        <span class="icon is-small is-left">
-                            <i class="fa fa-user"></i>
-                        </span>
-                    </div>
-                </div>
-                <p class="control">
-                    <button class="button is-warning" id="signin">
-                        Sign in
-                    </button>
-                </p>
-        </article>
-        </div>
-        </div><!--closes ancestor div -->
+        <!--closes ancestor div -->
     </div>
     <!--closes container div -->
     <script src="assets/javascript/app.js"></script>
