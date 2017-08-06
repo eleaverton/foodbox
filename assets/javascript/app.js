@@ -37,9 +37,11 @@ $(document).ready(function() {
             // foodbox new user sign up
             $("#signup").on("click", function(event) {
                 event.preventDefault();
+                //**add in if statement to check and see if username is taken
                 newUser.userName = $("#signUpUser").val().trim();
                 newUser.recipes = 0;
-                console.log(newUser.name);
+                console.log(newUser.userName);
+                
                 //push the newuser and get the key assciated with the data push
                 pushedUserRef = usersRef.push(newUser);
                 key=pushedUserRef.getKey();
@@ -68,18 +70,20 @@ $(document).ready(function() {
                     snap.forEach(function(child) {
                         if (child.val().userName === name) {
                             window.open("index.html","_self");
-                            //**open in same tab
                             // cancel enumeration
                             userInDatabase = true;
                             return true;
                             username=name;
                             console.log(username);
-                            //need to be able to pull key
+                            (function(global){
+                                global.localStorage.setItem('username',username);
+                            }(window));
+                            //**need to be able to get to saved recipes via username
                         }
                     }); // end of snap eventlistener
                     // if user was not found
                     if (!userInDatabase) {
-                        // alert("You are not recognized");
+                        // alert("You are not recognized"); not supposed to use alerts
                         $("#signinDiv").append("Username not in database.");
                     }
                 }); // end of usersRef eventlistener
@@ -91,7 +95,7 @@ $(document).ready(function() {
                 }(window));
                 (function(global){
                     username=global.localStorage.getItem("username");
-                }(window));
+                }(window)) ;
                 console.log(key);
                 console.log(username);
                 $(".rowTile").empty();
@@ -152,28 +156,19 @@ $(document).ready(function() {
                 recipeRef = database.ref("/users/"+key+"/recipes")
                 recipeRef.push(selectedRecipe);
 
-//https://console.firebase.google.com/project/foodbox-aac5f/database/data/users/-KqoinL1Idirj6XD8coX/recipes
-                // usersRef.on("value", function(snap) {
-                //     snap.forEach(function(child) {
-                //         if (child.val().userName === username) {
-                //             var key = child.key;
-                //             console.log(key);
-                //             // generate a key for a selected recipe
-                //             var userRecipesRef = usersRef.push().key;
-                //             console.log(userRecipesRef + "/" + key);
-                //             var updates = {};
+                recipeRef.on("child_added",function(snapshot){
+                    snapshot.forEach(function(childSnapshot){
+                        var childData=childSnapshot.val();
+                        console.log(childData);
+                        //**need to group these into an object or give them variable names so we can access them and put them in myfoodbox
+                    });
+                    // console.log(snapshot.val());
+                    // var boxRecipeInfo = snapshot.val();
 
-                //             updates['/users/' + key + "/" + userRecipesRef] = selectedRecipe;
-                //             firebase.database().ref().update(updates);
-                            
-            
-                            
-                //             return true;
-                //         }
-                //     }); // end of snap eventlistener
-                //     });
-                    //next we will add firebase push command based on selected recipe
-                    //matching the id of the recipe in the array
+
+                    
+                })
+
 
                 });
 
