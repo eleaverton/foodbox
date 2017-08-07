@@ -61,7 +61,7 @@ $(document).ready(function() {
 
                 window.open("index.html","_self")
 
-            });
+            }); //end sign-up click event
 
             // button to sign into foodbox app
             $("#signin").on("click", function(event) {
@@ -89,7 +89,7 @@ $(document).ready(function() {
                         $("#signinDiv").append("Username not in database. Please sign up.");
                     }
                 }); // end of usersRef eventlistener
-            });
+            }); //end sign-in click event
 
             $("#btnSearch").on("click", function(event) {
                 (function(global){
@@ -135,9 +135,9 @@ $(document).ready(function() {
                         $(recipeArticle).append(recipeFigure, recipeTitle, recipeInfo);
                         $(recipeDiv).append(recipeArticle);
                         $(tileDiv).append(recipeDiv);
-                    }
-                }
-            });
+                    } //closes for loop
+                } //closes display function
+            }); //closes search button click event
 
             $(document).on("click", ".star", function(event) {
                 console.log($(this).parents()[2].id);
@@ -232,10 +232,7 @@ $(document).ready(function() {
                         $("#blankDiv").append(favoritePanel);
                     }
 
-                    
-
-
-                };
+                    }; //closes for-loop
 
                 };//closes displayFavorites function
                 displayFavorites();
