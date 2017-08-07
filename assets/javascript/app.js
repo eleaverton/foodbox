@@ -86,7 +86,7 @@ $(document).ready(function() {
                     // if user was not found
                     if (!userInDatabase) {
                         // alert("You are not recognized"); not supposed to use alerts
-                        $("#signinDiv").append("Username not in database.");
+                        $("#signinDiv").append("Username not in database. Please sign up.");
                     }
                 }); // end of usersRef eventlistener
             });
@@ -113,16 +113,16 @@ $(document).ready(function() {
                         var recipeArticle = $("<article class='tile is-child'></article>");
                         var recipeFigure = $("<figure class='image is-4by3'></figure>");
                         var recipeTitle = $("<p class='title food-title'><i class='fa fa-star-o star' id='star" + foodItemsiId[i] + "' aria-hidden='true'></i>" + foodItemsiTitle[i] + "</p>");
-                        //console.log(recipeTitle);
+                        console.log(recipeTitle);
                         var recipeInfo = $("<div class='content'>Calories: " + foodItemsiCalories[i] + "<br> Fat: " + foodItemsiFat[i] + "<br> Protein: " + foodItemsiProtein[i] + "</div>");
                         var tileDiv = "#tileDiv1";
-                        //console.log("i: "+i);
-                        //console.log("remainder: "+i%3);
+                        console.log("i: "+i);
+                        console.log("remainder: "+i%3);
 
                         if (i % 3 === 0) {
                             console.log("i/3: " + i / 3)
                             tileDiv = "#tileDiv" + (i / 3 + 1);
-                            //console.log(tileDiv)
+                            console.log(tileDiv)
                         }
 
                         foodImg = $("<img>");
@@ -138,6 +138,7 @@ $(document).ready(function() {
                     }
                 }
             });
+
             $(document).on("click", ".star", function(event) {
                 console.log($(this).parents()[2].id);
                 var selectedRecipeId = $(this).parents()[2].id;
@@ -190,7 +191,54 @@ $(document).ready(function() {
                     }
                 };
                 console.log(myfoodbox);
-                //**need to create a loop that pushes myfoodbox objects to html
+                
+                // loop that pushes myfoodbox objects to html
+                function displayFavorites (){
+
+                $("#blankDiv").empty();
+
+                for (i = 0; i < myfoodbox.length; i++){
+                    
+                    var favoriteDiv = $("<div class='tile is-parent favorite-div'></div>");
+                    var favoriteArticle = $("<article class='tile is-child favorite-article'></article>");
+                    var favoriteFigure = $("<figure class='image is-4by3 favorite-figure'></figure>");
+
+                    var favoriteImage = $("<img>");
+                    favoriteImage.attr("src", myfoodbox[i].imgURL);
+                    
+                    var favoriteLink = $("<a>");
+                    favoriteLink.attr("href", myfoodbox[i].sourceURL);
+                    $(favoriteLink).append(favoriteImage);
+                    console.log(favoriteLink);
+                    
+                    var favoriteTitle = $("<p class='favorite-title'>"+ myfoodbox[i].Title + "</p>");
+
+                    $(favoriteFigure).append(favoriteLink);
+                    $(favoriteArticle).append(favoriteFigure, favoriteTitle);
+                    $(favoriteDiv).append(favoriteArticle);
+                    console.log(favoriteDiv);
+
+
+                    if (i%2===0){
+                        var favoritePanel = $("<div class='panel-block'></div>");
+                        favoritePanel.attr("id", "favoritePanel" + (i/2 + 1));
+                        console.log("panel created");
+                    }
+                    console.log(favoritePanel);
+
+                    $(favoritePanel).append(favoriteDiv);
+
+                    if (i%2===0){
+                        $("#blankDiv").append(favoritePanel);
+                    }
+
+                    
+
+
+                };
+
+                };//closes displayFavorites function
+                displayFavorites();
 
                 });
 
