@@ -186,9 +186,9 @@ function getHealthStats(ingObject, id, amount, unit) {
         if (counter === foodIngObjects.length) {
             var foodStats = $("<p id='healthInfo'>");
             foodStats.attr("class", "foodStats");
-            foodStats.append("Calories: " + (caloriesSum));
-            foodStats.append("<br>Fat: " + (fatSum));
-            foodStats.append("<br>Protein: " + (proteinSum));
+            foodStats.append("Calories: " + (Math.round(caloriesSum)));
+            foodStats.append("<br>Fat: " + (Math.round(fatSum)));
+            foodStats.append("<br>Protein: " + (Math.round(proteinSum)));
             $("#"+foodDivIndentifier).append(foodStats);
         }
 
