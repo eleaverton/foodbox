@@ -15,12 +15,13 @@ var fat = 0;
 var fatSum = 0;
 var protein = 0;
 var proteinSum = 0;
+var servings;
 var foodObjects = []; //is this the same as foodItems
-var allIngObjects = [];
 var foodHealthStats = [];
 var foodIngObjects = [];
 var counter = 0;
 var counter2 = 0;
+var recipeArticle;
 var key;
 var username;
 var savedRecipeInfo = [];
@@ -73,13 +74,15 @@ function getFoodObjects(resRecipe) {
         foodObject.SourceURL = sourceURL;
         foodObject.ImgURL = imgURL;
         foodObject.Title = title;
+        console.log(foodObject.Title);
         foodObject.Rating = rating;
         foodObject.RecipeId = recipeId;
         foodObjects.push(foodObject);
+        console.log(foodObjects[i].Title);
         // display on page
 
-        var recipeDiv = $("<div class='tile-is-parent recipeDiv' id="+foodObjects[i].RecipeId+"></div>");
-        var recipeArticle = $("<article class='tile is-child'></article>");
+        var recipeDiv = $("<div class='tile is-parent recipeDiv' id="+foodObjects[i].RecipeId+"></div>");
+        recipeArticle = $("<article class='tile is-child'></article>");
         var recipeFigure = $("<figure class='image is-4by3'></figure>");
         var recipeTitle = $("<p class='title food-title'><i class='fa fa-star-o star' id='star" + foodObjects[i].RecipeId + "' aria-hidden='true'></i>" + foodObjects[i].Title + "</p>");
         console.log(recipeTitle);
@@ -92,6 +95,7 @@ function getFoodObjects(resRecipe) {
 
         foodImg = $("<img>");
         foodImg.attr("src", foodObjects[i].ImgURL);
+        foodImg.attr("source",foodObjects[i].SourceURL);
         foodImg.addClass("foodImage");
         var str = title;
         str = str.replace(/\s/g, '');
@@ -125,27 +129,25 @@ function getSearchedIng(foodURL) {
 function getIngredients(resIng) {
     console.log(resIng);
     //console.log(i);
-    //var ingObjects = [];
-    var recipeId=resIng.
     foodIngObjects = [];
     for (i = 0; i < resIng.extendedIngredients.length; i++) {
         var ingObject = {};
         var id = resIng.extendedIngredients[i].id;
         var amount = resIng.extendedIngredients[i].amount;
         var unit = resIng.extendedIngredients[i].unit;
+        servings = resIng.servings;
         ingObject.Id = id;
         ingObject.Amount = amount;
         ingObject.Unit = unit;
-        //ingObjects.push(ingObject);
         foodIngObjects.push(ingObject);
     }
-    //allIngObjects.push(ingObjects);
 }
 
 // loops through list of ingredient objects and makes api call for each one
 function getfoodStats() {
     // reset calories sum for selected food item
     caloriesSum = 0;
+    console.log("get foodStats "+caloriesSum);
     fatSum = 0;
     proteinSum = 0;
     counter = 0;
@@ -169,24 +171,25 @@ function getHealthStats(ingObject, id, amount, unit) {
     }).then(function(resHealthStats) {
         //sum up calories from all ingredients into total calorie count
         //console.log(resHealthStats);
-        var calories = parseInt(resHealthStats.nutrition.nutrients[0].amount);
-        var fat = parseInt(resHealthStats.nutrition.nutrients[1].amount);
-        var protein = parseInt(resHealthStats.nutrition.nutrients[7].amount);
+        calories = parseInt(resHealthStats.nutrition.nutrients[0].amount);
+        fat = parseInt(resHealthStats.nutrition.nutrients[1].amount);
+        protein = parseInt(resHealthStats.nutrition.nutrients[7].amount);
         ingObject.Calories = calories;
         ingObject.Fat = fat;
         ingObject.Protein = protein;
         // sum calories
         caloriesSum += calories;
+        console.log("get healthStats "+caloriesSum);
         fatSum += fat;
         proteinSum += protein;
         counter++;
         if (counter === foodIngObjects.length) {
             var foodStats = $("<p id='healthInfo'>");
             foodStats.attr("class", "foodStats");
-            foodStats.append("Calories: " + caloriesSum);
-            foodStats.append("Fat: " + fatSum);
-            foodStats.append("Protein: " + proteinSum);
-            $(recipeArticle).append(foodStats);
+            foodStats.append("Calories: " + (caloriesSum));
+            foodStats.append("<br>Fat: " + (fatSum));
+            foodStats.append("<br>Protein: " + (proteinSum));
+            $("#"+foodDivIndentifier).append(foodStats);
         }
 
     }); // end of then method
@@ -210,6 +213,7 @@ function displayFavorites() {
 
         var favoriteImage = $("<img>");
         favoriteImage.attr("src", myfoodbox[i].imgURL);
+        favoriteImage.addClass("favorite-image");
 
         var favoriteLink = $("<a>");
         favoriteLink.attr("href", myfoodbox[i].sourceURL);
@@ -315,9 +319,13 @@ $(document).ready(function() {
         (function(global) {
             username = global.localStorage.getItem("username");
         }(window));
+        searchTerm="";
+        foodObjects=[];
         console.log(key);
         console.log(username);
         $(".rowTile").empty();
+        $(".food-title").empty();
+        $(".foodImage").empty();
         event.preventDefault();
         searchTerm = $("#searchInput").val();
         console.log(searchTerm);
@@ -325,11 +333,20 @@ $(document).ready(function() {
 
         //on click, get health info
         $(document).on("click", ".foodImage", function(){
-          $("#healthInfo").empty();
+        	console.log("food objects: "+foodObjects);
+        	console.log("food ing objects: "+foodIngObjects);
+        	console.log("food health stats: "+foodHealthStats);
+          $("#healthInfo").remove();
           // get food source url
-          var foodURL = $(this).attr("source-url");
-          foodDivIndentifier = $(this).attr("title");
-          $(this).parent().attr("id",foodDivIndentifier);
+          var foodURL = ($(this)[0].attributes[1].nodeValue);
+          console.log($(this));
+          console.log($(this)[0].attributes[1].nodeValue);
+          console.log(foodURL);
+  			
+  			foodDivIndentifier=($(this).parent().parent().parent().attr("id"));
+          // foodDivIndentifier = $(this).attr("title");
+          console.log(foodDivIndentifier);
+          $(this).attr("id",foodDivIndentifier);
           
           getSearchedIng(foodURL).then(getIngredients).then(getfoodStats).then(showCalories);
         });//closes on click foodImage
