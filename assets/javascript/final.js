@@ -66,7 +66,11 @@ function getFoodObjects(resRecipe) {
     for (var i = 0; i < 6; i++) {
         var foodObject = {};
         sourceURL = resRecipe.recipes[i].source_url;
+        sourceURLrep = sourceURL.replace("http","https");
+        console.log(sourceURLrep);
         imgURL = resRecipe.recipes[i].image_url;
+        imgURLrep = imgURL.replace("http","https");
+        console.log(imgURLrep);
         title = resRecipe.recipes[i].title;
         rating = resRecipe.recipes[i].social_rank;
         recipeId = resRecipe.recipes[i].recipe_id;
